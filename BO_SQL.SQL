@@ -515,7 +515,7 @@ COMMENT ON COLUMN "INQUIRIES"."INQ_SATIS_GRADE" IS '상담만족도(1~5:5점척�
 
 CREATE TABLE "EMPLOYEES"(
   "EMP_ID" Number NOT NULL,
-  "EMP_NAME" Varchar2(10 ) NOT NULL,
+  "EMP_NAME" Varchar2(20 ) NOT NULL,
   "DEPT_ID" Number,
   "ADMIN_EMP_ID" Number,
   "HIRE_DATE" Date,
