@@ -2,7 +2,7 @@
 
 Oracle Database 10g or above
 
-** Tablespace creation
+** Data Tablespace creation
 
 col file_name new_value file_name noprint
 col bo_file_name new_value bo_file_name noprint
@@ -15,6 +15,22 @@ where df.ts#=ts.ts#
 select substr('&&file_name',1,instr('&&file_name','\',-1))||'BO01.DBF' bo_file_name from dual;
 
 create tablespace BO datafile '&&bo_file_name' size 4G;
+
+** Undo Tablespace Resize
+
+col file_name new_value file_name noprint
+col undo_name new_value undo_name noprint
+
+select value undo_name from v$parameter where name='undo_tablespace';
+
+select df.name file_name
+from v$datafile df, v$tablespace ts
+where df.ts#=ts.ts#
+  and ts.name = '&&undo_name'
+;
+select substr('&&file_name',1,instr('&&file_name','\',-1))||'BO01.DBF' bo_file_name from dual;
+
+alter database datafile '&&file_name' resize 2G;
 
 
 ** User creation
